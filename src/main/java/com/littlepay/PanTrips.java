@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Java class to maintain mapping between pan and corresponding trips
+ * Java class to maintain mapping between pan and corresponding single tap trips
  * For example :
  *      key : 5500005555555559
  *      value : {tripObject1, tripObject2, tripObject3}
@@ -18,7 +18,7 @@ public class PanTrips {
     HashMap<BigInteger, HashSet<Trip>> allTrips;
 
     public PanTrips() {
-        allTrips = new HashMap<>();
+        this.allTrips = new HashMap<>();
     }
 
     public void addTrip(Trip trip) {

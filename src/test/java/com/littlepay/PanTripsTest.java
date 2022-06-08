@@ -1,14 +1,16 @@
 package com.littlepay;
 
-import com.littlepay.model.stops.StopId;
-import com.littlepay.model.trips.*;
+import com.littlepay.model.trips.BusId;
+import com.littlepay.model.trips.CompanyId;
+import com.littlepay.model.trips.TapType;
+import com.littlepay.model.trips.Trip;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.math.BigInteger;
-import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -19,44 +21,45 @@ public class PanTripsTest {
     @BeforeTest
     public void init() {
         panTrips = new PanTrips();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         trip1 = new Trip.TripBuilder()
                 .tripId(BigInteger.valueOf(1))
-                .tripDate(Date.from(Instant.now()))
-                .tripType(TripType.ON)
-                .stopId(new StopId())
-                .companyId(new CompanyId())
-                .busId(new BusId())
+                .tripDate(LocalDateTime.parse("22-01-2018 13:05:00", dateTimeFormatter))
+                .tapType(TapType.ON)
+                .stopId("stop1")
+                .companyId(new CompanyId("companyId1"))
+                .busId(new BusId("B37"))
                 .pan(new BigInteger("5500005555555559"))
                 .build();
 
         trip2 = new Trip.TripBuilder()
                 .tripId(BigInteger.valueOf(2))
-                .tripDate(Date.from(Instant.now()))
-                .tripType(TripType.ON)
-                .stopId(new StopId())
-                .companyId(new CompanyId())
-                .busId(new BusId())
+                .tripDate(LocalDateTime.parse("22-01-2018 13:05:00", dateTimeFormatter))
+                .tapType(TapType.ON)
+                .stopId("stop2")
+                .companyId(new CompanyId("companyId2"))
+                .busId(new BusId("B40"))
                 .pan(new BigInteger("5500005555555560"))
                 .build();
 
         trip3 = new Trip.TripBuilder()
                 .tripId(BigInteger.valueOf(3))
-                .tripDate(Date.from(Instant.now()))
-                .tripType(TripType.ON)
-                .stopId(new StopId())
-                .companyId(new CompanyId())
-                .busId(new BusId())
+                .tripDate(LocalDateTime.parse("22-01-2018 13:05:15", dateTimeFormatter))
+                .tapType(TapType.OFF)
+                .stopId("stop3")
+                .companyId(new CompanyId("companyId2"))
+                .busId(new BusId("B40"))
                 .pan(new BigInteger("5500005555555560"))
                 .build();
 
         trip4 = new Trip.TripBuilder()
                 .tripId(BigInteger.valueOf(3))
-                .tripDate(Date.from(Instant.now()))
-                .tripType(TripType.OFF)
-                .stopId(new StopId())
-                .companyId(new CompanyId())
-                .busId(new BusId())
+                .tripDate(LocalDateTime.parse("22-01-2018 13:05:00", dateTimeFormatter))
+                .tapType(TapType.ON)
+                .stopId("stop4")
+                .companyId(new CompanyId("companyId4"))
+                .busId(new BusId("B50"))
                 .pan(new BigInteger("5500005555555565"))
                 .build();
 

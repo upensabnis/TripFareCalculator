@@ -1,11 +1,10 @@
 package com.littlepay.model.trips;
 
 public class BusId {
-    private static int counter = 100;
     private String id;
 
-    public BusId() {
-        id = "bus" + (++counter);
+    public BusId(String busId) {
+        id = busId;
     }
 
     public String getId() {

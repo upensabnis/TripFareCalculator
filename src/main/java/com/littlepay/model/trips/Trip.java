@@ -1,24 +1,21 @@
 package com.littlepay.model.trips;
 
-import com.littlepay.model.stops.StopId;
-
 import java.math.BigInteger;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Trip {
     private BigInteger tripId;
-    private Date tripDate;
-
-    private Enum tripType;
-    private StopId stopId;
+    private LocalDateTime tripDateTime;
+    private TapType tapType;
+    private String stopId;
     private CompanyId companyId;
     private BusId busId;
     private BigInteger pan;
 
     private Trip(TripBuilder tripBuilder) {
         this.tripId = tripBuilder.tripId;
-        this.tripDate = tripBuilder.tripDate;
-        this.tripType = tripBuilder.tripType;
+        this.tripDateTime = tripBuilder.tripDateTime;
+        this.tapType = tripBuilder.tapType;
         this.stopId = tripBuilder.stopId;
         this.companyId = tripBuilder.companyId;
         this.busId = tripBuilder.busId;
@@ -29,15 +26,15 @@ public class Trip {
         return tripId;
     }
 
-    public Date getTripDate() {
-        return tripDate;
+    public LocalDateTime getTripDateTime() {
+        return tripDateTime;
     }
 
-    public Enum getTripType() {
-        return tripType;
+    public TapType getTapType() {
+        return tapType;
     }
 
-    public StopId getStopId() {
+    public String getStopId() {
         return stopId;
     }
 
@@ -55,9 +52,9 @@ public class Trip {
 
     public static class TripBuilder {
         private BigInteger tripId;
-        private Date tripDate;
-        private Enum tripType;
-        private StopId stopId;
+        private LocalDateTime tripDateTime;
+        private TapType tapType;
+        private String stopId;
         private CompanyId companyId;
         private BusId busId;
         private BigInteger pan;
@@ -67,17 +64,17 @@ public class Trip {
             return this;
         }
 
-        public TripBuilder tripDate(Date tripDate) {
-            this.tripDate = tripDate;
+        public TripBuilder tripDate(LocalDateTime tripDateTime) {
+            this.tripDateTime = tripDateTime;
             return this;
         }
 
-        public TripBuilder tripType(Enum tripType) {
-            this.tripType = tripType;
+        public TripBuilder tapType(TapType tapType) {
+            this.tapType = tapType;
             return this;
         }
 
-        public TripBuilder stopId(StopId stopId) {
+        public TripBuilder stopId(String stopId) {
             this.stopId = stopId;
             return this;
         }
@@ -110,6 +107,12 @@ public class Trip {
 
         Trip trip = (Trip) o;
 
-        return this.pan.equals(trip.getPan());
+        return this.tripId.equals(trip.getTripId()) &&
+                this.getTripDateTime().equals(trip.getTripDateTime()) &&
+                this.getTapType().equals(trip.getTapType()) &&
+                this.getStopId().equals(trip.getStopId()) &&
+                this.getCompanyId().equals(trip.getCompanyId()) &&
+                this.getBusId().equals(trip.getBusId()) &&
+                this.pan.equals(trip.getPan());
     }
 }
